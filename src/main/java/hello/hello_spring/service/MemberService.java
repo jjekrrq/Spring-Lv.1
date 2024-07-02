@@ -7,8 +7,12 @@ import hello.hello_spring.repository.MemoryMemberRepository;
 import java.util.List;
 import java.util.Optional;
 
+// 테스트 자동 생성 단축기 : alt + enter
 public class MemberService {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+    public MemberService(MemoryMemberRepository memberRepository){
+        this.memberRepository = memberRepository;
+    }
 
     /*
     * 회원 가입
@@ -37,6 +41,7 @@ public class MemberService {
 //        }
     // 과거에는 ifNull과 같은 방법으로 null을 확인했지만
     // 최근에는 Optional과 같은 방법으로 프로그래밍함.
+    // 인텔리제이 메소드 추출 기능 : ctrl + alt + m
     private void checkIfMemberIsPresent(Member member) {
         memberRepository.findByName(member.getName())
                         .ifPresent(member1 -> {
