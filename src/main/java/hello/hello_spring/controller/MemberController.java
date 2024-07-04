@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 public class MemberController {
     private final MemberService memberService;
 
-    @Autowired // @AutoWired 하면 스프링 컨테이너에 있는 memberService를 연결시켜줌.
+    @Autowired // @Autowired 하면 스프링 컨테이너에 있는 memberService를 연결시켜줌.
     // DI (Dependency Injection) - 의존성 주입 : 의존성 주입에는 3가지 방법이 있다. 그 중 생성자 주입이 가장 선호되는 방식.
     public MemberController(MemberService memberService){
         this.memberService = memberService;

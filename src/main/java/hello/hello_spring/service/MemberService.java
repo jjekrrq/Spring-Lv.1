@@ -10,11 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 // 테스트 자동 생성 단축기 : alt + enter
-@Service
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    @Autowired
     // MemberService를 스프링이 생성을 할때, @Autowired를 통해 스프링 컨테이너에 저장된 memberRepository를 스프링이 연결시켜줌.
     public MemberService(MemoryMemberRepository memberRepository){
         this.memberRepository = memberRepository;
