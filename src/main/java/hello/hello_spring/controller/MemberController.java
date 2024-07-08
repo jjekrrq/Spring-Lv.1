@@ -1,8 +1,11 @@
 package hello.hello_spring.controller;
 
+import hello.hello_spring.domain.Member;
 import hello.hello_spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 // @Controller 라는 어노테이션이 붙어 있으면 스프링 컨테이너에서 어노테이션이 붙은 클래스 객체를 관리함.
 // 즉, 스프링 컨테이너에 @Controller가 붙은 클래스를 등록한다!
@@ -21,4 +24,21 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    // 회원가입
+    // url은 같지만 매핑 방식에 따라 다른 url을 호출한다.
+    @GetMapping("/members/new")
+    public String createForm(){
+        return "members/createMembersForm";
+    }
+
+    // <form>태그로부터 얻은 값을 MemberForm클래스에 저장하고
+    // 저장한 값을 Member를 저장한다.
+    @PostMapping("members/new")
+    public String create(MemberForm form){
+        Member member = new Member();
+        member.setName(form.getName());
+
+        memberService.join(member);
+        return "redirect:/";
+    }
 }
