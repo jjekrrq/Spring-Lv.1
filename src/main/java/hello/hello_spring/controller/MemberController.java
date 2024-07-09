@@ -4,8 +4,11 @@ import hello.hello_spring.domain.Member;
 import hello.hello_spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 // @Controller 라는 어노테이션이 붙어 있으면 스프링 컨테이너에서 어노테이션이 붙은 클래스 객체를 관리함.
 // 즉, 스프링 컨테이너에 @Controller가 붙은 클래스를 등록한다!
@@ -33,6 +36,8 @@ public class MemberController {
 
     // <form>태그로부터 얻은 값을 MemberForm클래스에 저장하고
     // 저장한 값을 Member를 저장한다.
+    // 현재, 메모리에 값을 저장하기 때문에, 스프링을 실행했다가 끄면, 값이 전부 사라짐.
+    // 따라서, 데이터베이스를 사용해야 함. 값을 갖고있기 위해서는.
     @PostMapping("members/new")
     public String create(MemberForm form){
         Member member = new Member();
@@ -40,5 +45,12 @@ public class MemberController {
 
         memberService.join(member);
         return "redirect:/";
+    }
+
+    @GetMapping("/members")
+    public String list(Model model){
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "members/getAllMembersList";
     }
 }
