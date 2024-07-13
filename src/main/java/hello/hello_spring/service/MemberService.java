@@ -14,7 +14,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     // MemberService를 스프링이 생성을 할때, @Autowired를 통해 스프링 컨테이너에 저장된 memberRepository를 스프링이 연결시켜줌.
-    public MemberService(MemoryMemberRepository memberRepository){
+    public MemberService(MemberRepository memberRepository){
         this.memberRepository = memberRepository;
     }
 
