@@ -38,7 +38,8 @@ public class HelloController {
     }
 
     @GetMapping("hello-api")
-    @ResponseBody
+    @ResponseBody // @ResponseBody를 사용하면, 자동으로 json으로 변환되어 그대로 response된다.
+    // RequestParam을 사용하면 URL에 쿼리스트링으로 달아줘야 함. 안해주면 오류 발생.
     public Hello helloApi(@RequestParam("name") String name){ // @RequestParam으로 name을 클라로부터 받아서
         // @ResponseBody에 담아 반환해준다는 뜻인 것 같다.
         Hello hello = new Hello();
@@ -50,6 +51,8 @@ public class HelloController {
         private String name;
 
         // 게터, 세터 자바 빈 규약
+        // 자바 빈즈 규약
+        // 1. 필드는 private 2. getter, setter로 필드 접근 3. 생성자 하나 필수.
         public String getName() {
             return name;
         }
